@@ -1,0 +1,16 @@
+.panel-heading{
+    position: relative;
+    top: -45px;
+}
+.panel-body{
+    position: relative;
+   height: 150px;
+}
+.panel-footer{
+    position: relative;
+    bottom: -70px;
+}
+.next_pos{
+    position: relative;
+    left: 630px;
+}
