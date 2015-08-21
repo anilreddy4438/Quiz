@@ -33,8 +33,29 @@ var array_quiz=[
     }
 ];
 //console.log(array_quiz)
-for(var i=0;i<=array_quiz.length;i++){
-    $('#quiz_question').append(array_quiz[i].question)
-    $('#quiz_option').append(array_quiz[i].option)
+function qusetion_quiz(i){
+
+    $('.panel-body').append('<div class="quiz_text"><div id="quiz_question"> <b>Question: </b> '+ array_quiz[i].question +'</div>'+
+        '<div id="quiz_option1"><b>A :</b>'+ array_quiz[i].option.A +'</div>'+
+        '<div id="quiz_option2"><b>B :</b>'+ array_quiz[i].option.B +'</div>'+
+        '<div id="quiz_option3"><b>C :</b>'+ array_quiz[i].option.C +'</div>'+
+        '<div id="quiz_option4"><b>D :</b>'+ array_quiz[i].option.D +'</div><br></div>')
+
+}
+
+var clicks = -1;
+function clickME() {
+    $('h1').hide()
+
+    clicks += 1;
+    //console.log(clicks)
+    for(var i=clicks-1;i<array_quiz.length;i++) {
+        if(i==clicks){
+            $('.quiz_text').hide()
+            qusetion_quiz(i)
+
+        }
+
+    }
 
 }
