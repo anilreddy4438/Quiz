@@ -78,7 +78,7 @@ function clickME() {
     $("input:radio[name=check]").click(function() {
 
         s=($('input:radio[name=check   ]').filter(":checked").val())
-        console.log(y)
+        //console.log(y)
     });
 }
 
