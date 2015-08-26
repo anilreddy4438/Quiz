@@ -1,7 +1,7 @@
 
 var s
-var x=[];
-var y=[];
+var answer_array=[];
+var checkbox_answer=[];
 var array_quiz=[
 
     {"question": "'OS' computer abbreviation usually means ?", "option":{A: "Order of Significance", B: "Open Software",C: "Operating System",D: "Optical Sensor"}, Answer: "C"},
@@ -54,7 +54,7 @@ var clicks = -1;
 
 $.each(array_quiz, function () {
     //console.log(this.Answer);
-    x.push(this.Answer)
+    answer_array.push(this.Answer)
 });
 var result=0
 
@@ -67,17 +67,15 @@ function clickME() {
             if (i == clicks) {
 
                 if(clicks!=0){
-                    y.push(s)
+                    checkbox_answer.push( checkbox_value)
                 };
 
-                if(y.length != 0) {
-                    var l = y.length-1;
+                if( checkbox_answer.length != 0) {
+                    var l =  checkbox_answer.length-1;
 
-                    if (y[l] == x[l] ) {
+                    if ( checkbox_answer[l] == answer_array[l] ) {
                         alert('the answer is correct')
-                        result += 1;
-
-
+                        result += 1
                     }
                 }
                 $('.quiz_text').hide()
@@ -86,7 +84,7 @@ function clickME() {
     };
     $("input:radio[name=check]").click(function() {
 
-        s=($('input:radio[name=check   ]').filter(":checked").val())
+        checkbox_value=($('input:radio[name=check   ]').filter(":checked").val())
         //console.log(y)
     });
     //console.log(result)
