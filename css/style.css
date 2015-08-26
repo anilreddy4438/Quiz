@@ -12,5 +12,9 @@
 }
 .next_pos{
     position: relative;
-    left: 450px;
+    left: 800px;
+}
+.prev_pos{
+    position: relative;
+    left: 0px;
 }
