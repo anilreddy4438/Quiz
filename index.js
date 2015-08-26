@@ -35,12 +35,17 @@ var array_quiz=[
 //console.log(array_quiz)
 function qusetion_quiz(i){
 
-    $('.panel-body').append('<div class="quiz_text"><div id="quiz_question"> <b>Question: </b> '+ array_quiz[i].question +'</div>'+
-        '<div id="quiz_option1"> <input type="radio" name="check" value="A" data-number="'+i+'" > '+'<b>A :</b>'+ array_quiz[i].option.A +'</div>'+
-        '<div id="quiz_option2"> <input type="radio" name="check" value="B" data-number="'+i+'"> '+'<b>B :</b>'+ array_quiz[i].option.B +'</div>'+
-        '<div id="quiz_option3"> <input type="radio" name="check" value="C" data-number="'+i+'"> '+'<b>C :</b>'+ array_quiz[i].option.C +'</div>'+
-        '<div id="quiz_option4"> <input type="radio" name="check" value="D"  data-number="'+i+'"> '+'<b>D :</b>'+ array_quiz[i].option.D +'</div><br></div>')
+    if (i<10 ) {
+        $('.panel-body').append('<div class="quiz_text"><div id="quiz_question"> <b>Question: </b> ' + array_quiz[i].question + '</div>' +
+            '<div id="quiz_option1"> <input type="radio" name="check" value="A"  > ' + '<b>A :</b>' + array_quiz[i].option.A + '</div>' +
+            '<div id="quiz_option2"> <input type="radio" name="check" value="B" > ' + '<b>B :</b>' + array_quiz[i].option.B + '</div>' +
+            '<div id="quiz_option3"> <input type="radio" name="check" value="C" > ' + '<b>C :</b>' + array_quiz[i].option.C + '</div>' +
+            '<div id="quiz_option4"> <input type="radio" name="check" value="D" > ' + '<b>D :</b>' + array_quiz[i].option.D + '</div><br></div>')
 
+    }
+    else{
+        $('.panel-body').append('<div><h3> YOUR SCORE : '+result +'</h3></div>')
+    }
 
 }
 
@@ -51,23 +56,27 @@ $.each(array_quiz, function () {
     //console.log(this.Answer);
     x.push(this.Answer)
 });
-
+var result=0
 
 function clickME() {
     $('h1').hide()
 
     clicks += 1;
     //console.log(clicks)
-    for(var i=clicks-1;i<array_quiz.length;i++) {
+    for(var i=clicks-1;i<=array_quiz.length;i++) {
             if (i == clicks) {
 
                 if(clicks!=0){
                     y.push(s)
                 };
+
                 if(y.length != 0) {
-                    var l = y.length-1
-                    if (y[l] == x[l]) {
+                    var l = y.length-1;
+
+                    if (y[l] == x[l] ) {
                         alert('the answer is correct')
+                        result += 1;
+
 
                     }
                 }
@@ -80,5 +89,8 @@ function clickME() {
         s=($('input:radio[name=check   ]').filter(":checked").val())
         //console.log(y)
     });
+    //console.log(result)
+
 }
+
 
