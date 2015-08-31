@@ -53,9 +53,9 @@ function qusetion_quiz(i){
     else{
         $('.next_pos').hide()
         $('.prev_pos').hide()
-        for(var g=0;g<=answer_array.length;g++){
+        for(var g=0;g<answer_array.length;g++){
             if(answer_array[g]==checkbox_answer[g]){
-                result+=1
+                   result = result + 1
             }
         }
 
@@ -100,11 +100,10 @@ function clickME() {
                     if(s != null) {
                         checkbox_answer.splice(i-1,1,s)
                         s = null;
-                        var l =  checkbox_answer.length-1;
+                        //var l =  checkbox_answer.length-1;
 
-                        if ( checkbox_answer[l] == answer_array[l] ) {
+                        if ( checkbox_answer[i-1] == answer_array[i-1] ) {
                             alert('the answer is correct')
-                            result += 1
                         }
                         clicks += 1 ;
                         $('.quiz_text').hide()
@@ -132,9 +131,9 @@ function prevClick(){
     if(s != null) {
         checkbox_answer.splice(j+1,1,s)
         s = null;
-        var l =  checkbox_answer.length-1;
+        //var l =  checkbox_answer.length-1;
 
-        if ( checkbox_answer[l] == answer_array[l] ) {
+        if ( checkbox_answer[j+1] == answer_array[j+1] ) {
             alert('the answer is correct')
         }
 }}
