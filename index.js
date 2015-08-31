@@ -5,7 +5,6 @@ var checkbox_answer=[];
 var result=0;
 var s = null;
 var clicks = 1;
-
 var array_quiz=[
 
     {"question": "'OS' computer abbreviation usually means ?", "option":{A: "Order of Significance", B: "Open Software",C: "Operating System",D: "Optical Sensor"}, Answer: "C"},
@@ -43,11 +42,12 @@ function qusetion_quiz(i){
         if(i==1){
             $('.panel-footer').append(' <button type="button" class="btn btn-info prev_pos" onclick="prevClick()">PREVIOUS</button>')
         }
+        var name = "check-"+i;
         $('.panel-body').append('<div class="quiz_text"><div id="quiz_question"> <b>Question: </b> ' + array_quiz[i].question + '</div>' +
-            '<div id="quiz_option1"> <input type="radio" name="check" value="A" class="checkbox_check" > ' + '<b>A :</b>' + array_quiz[i].option.A + '</div>' +
-            '<div id="quiz_option2"> <input type="radio" name="check" value="B" class="checkbox_check"> ' + '<b>B :</b>' + array_quiz[i].option.B + '</div>' +
-            '<div id="quiz_option3"> <input type="radio" name="check" value="C" class="checkbox_check"> ' + '<b>C :</b>' + array_quiz[i].option.C + '</div>' +
-            '<div id="quiz_option4"> <input type="radio" name="check" value="D" class="checkbox_check"> ' + '<b>D :</b>' + array_quiz[i].option.D + '</div><br></div>')
+            '<div id="quiz_option1"> <input type="radio" name='+name+' value="A" class="checkbox_check" > ' + '<b>A :</b>' + array_quiz[i].option.A + '</div>' +
+            '<div id="quiz_option2"> <input type="radio" name='+name+' value="B" class="checkbox_check"> ' + '<b>B :</b>' + array_quiz[i].option.B + '</div>' +
+            '<div id="quiz_option3"> <input type="radio" name='+name+' value="C" class="checkbox_check"> ' + '<b>C :</b>' + array_quiz[i].option.C + '</div>' +
+            '<div id="quiz_option4"> <input type="radio" name='+name+' value="D" class="checkbox_check"> ' + '<b>D :</b>' + array_quiz[i].option.D + '</div><br></div>')
 
     }
     else{
@@ -62,31 +62,32 @@ function qusetion_quiz(i){
         $('.panel-body').append('<div><h3> YOUR SCORE : '+result +'</h3></div>')
     }
 
-    $("input:radio[name='check']").click(function() {
-        s=($('input:radio[name=check   ]').filter(":checked").val());
+    $("input:radio[name="+name+"]").click(function() {
+        s=($('input:radio[name='+name+']').filter(":checked").val());
     });
 }
 
-    function question_quiz1(j) {
+function question_quiz1(j) {
 
-        if (j >= 0) {
+    var name = "check-"+j;
+    if (j >= 0) {
 
 
-        $('.panel-body').append('<div class="quiz_text"><div id="quiz_question"> <b>Question: </b> ' + array_quiz[j].question + '</div>' +
-            '<div id="quiz_option1"> <input type="radio" name="check" value="A" class="checkbox_check" > ' + '<b>A :</b>' + array_quiz[j].option.A + '</div>' +
-            '<div id="quiz_option2"> <input type="radio" name="check" value="B" class="checkbox_check"> ' + '<b>B :</b>' + array_quiz[j].option.B + '</div>' +
-            '<div id="quiz_option3"> <input type="radio" name="check" value="C" class="checkbox_check"> ' + '<b>C :</b>' + array_quiz[j].option.C + '</div>' +
-            '<div id="quiz_option4"> <input type="radio" name="check" value="D" class="checkbox_check"> ' + '<b>D :</b>' + array_quiz[j].option.D + '</div><br></div>')
+    $('.panel-body').append('<div class="quiz_text"><div id="quiz_question"> <b>Question: </b> ' + array_quiz[j].question + '</div>' +
+        '<div id="quiz_option1"> <input type="radio" name='+name+' value="A" class="checkbox_check" > ' + '<b>A :</b>' + array_quiz[j].option.A + '</div>' +
+        '<div id="quiz_option2"> <input type="radio" name='+name+' value="B" class="checkbox_check"> ' + '<b>B :</b>' + array_quiz[j].option.B + '</div>' +
+        '<div id="quiz_option3"> <input type="radio" name='+name+' value="C" class="checkbox_check"> ' + '<b>C :</b>' + array_quiz[j].option.C + '</div>' +
+        '<div id="quiz_option4"> <input type="radio" name='+name+' value="D" class="checkbox_check"> ' + '<b>D :</b>' + array_quiz[j].option.D + '</div><br></div>')
 
     }
-else{
-
-            $('.prev_pos').hide()
+    if (j<=0){
+        $('.prev_pos').hide()
     }
-        $("input:radio[name='check']").click(function() {
-            s=($('input:radio[name=check   ]').filter(":checked").val());
-        });
-    }
+    //var name="check-"+(j-1);
+    $("input:radio[name="+name+"]").click(function() {
+        s=($('input:radio[name='+name+'  ]').filter(":checked").val());
+    });
+}
 $.each(array_quiz, function () {
     answer_array.push(this.Answer)
 });
@@ -95,45 +96,59 @@ function clickME() {
     //$('.prev_pos').show()
     $('h1').hide()
     $('h2').hide()
-     i = clicks-1;
-                if(clicks!=1){
-                    if(s != null) {
-                        checkbox_answer.splice(i-1,1,s)
-                        s = null;
-                        //var l =  checkbox_answer.length-1;
+    i = clicks-1;
+    if(clicks!=1){
+        var name = "check-"+(i-1);
 
-                        if ( checkbox_answer[i-1] == answer_array[i-1] ) {
-                            alert('the answer is correct')
-                        }
-                        clicks += 1 ;
-                        $('.quiz_text').hide()
-                        qusetion_quiz(i)
-                    }
-                };
-                if (clicks == 1) {
-                    clicks += 1;
-                    $('.quiz_text').hide()
-                    qusetion_quiz(i)
-                }
+        if($('input:radio[name='+name+']:checked').length) {
+            if(s!=null){
+                checkbox_answer.splice(i-1,1,s)
+            }
+            s = null;
+            //var l =  checkbox_answer.length-1;
+
+            //if ( checkbox_answer[i-1] == answer_array[i-1] ) {
+            //    alert('the answer is correct')
+            //    }
+            clicks += 1 ;
+            $('.quiz_text').hide()
+            qusetion_quiz(i)
+            name = "check-"+(i);
+            if(checkbox_answer[i]!= null){
+                $('input[name='+ name +'][value="' + checkbox_answer[i] + '"]').prop('checked', true);
+            }
+        }
+    }
+    if (clicks == 1) {
+        clicks += 1;
+        $('.quiz_text').hide()
+        qusetion_quiz(i)
+    }
     if(i == -1 || i== -2){
         clicks += 1;
     }
 }
 function prevClick(){
+
+
     $('h1').hide()
-        clicks -= 1;
+    clicks -= 1;
     j = clicks-1;
     if(j==0){
         $('.prev_pos').hide()
     }
-        $('.quiz_text').hide()
-    question_quiz1(j);
-    if(s != null) {
+    $('.quiz_text').hide()
+    question_quiz1(j-1);
+    var name="check-"+(j-1);
+    if(checkbox_answer[j-1]!= null){
+        $('input[name='+name+'][value="' + checkbox_answer[j-1] + '"]').prop('checked', true);
+    }
+    if(s!=null) {
         checkbox_answer.splice(j+1,1,s)
         s = null;
         //var l =  checkbox_answer.length-1;
-
-        if ( checkbox_answer[j+1] == answer_array[j+1] ) {
-            alert('the answer is correct')
-        }
-}}
+        //if ( checkbox_answer[j+1] == answer_array[j+1] ) {
+        //    alert('the answer is correct')
+        //}
+    }
+}
